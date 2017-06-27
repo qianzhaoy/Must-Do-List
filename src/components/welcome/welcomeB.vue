@@ -17,7 +17,7 @@
 				this.$router.push('/home')
 			},
 			onSwipeRight() {
-				this.$router.push('A')
+				this.$router.push('/welcome/A')
 			}
 		}
 	}
@@ -60,13 +60,13 @@
 			transform: translate3d(0, 0, 0)
 		}
 		to {
-			transform: translate3d(10px, 0, 0)
+			transform: translate3d(5px, 0, 0)
 		}
 	}
 	
 	@keyframes leftArrow {
 		from {
-			transform: translate3d(10px, 0, 0)
+			transform: translate3d(5px, 0, 0)
 		}
 		to {
 			transform: translate3d(0, 0, 0)

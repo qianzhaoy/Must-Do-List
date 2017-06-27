@@ -13,7 +13,7 @@
 		name: "welcomeA",
 		methods:{
 			onSwipeLeft(){
-				this.$router.push('B')
+				this.$router.push('/welcome/B')
 			}
 		}
 	}
@@ -49,7 +49,7 @@
 			transform: translate3d(0,0,0)
 		}
 		to{
-			transform: translate3d(10px,0,0)
+			transform: translate3d(5px,0,0)
 		}
 	}
 

@@ -17,6 +17,7 @@
 	#welcome {
 		height: 100%;
 		width: 100%;
+		margin: 0
 	}
 	
 	.fade-leave-active,
@@ -28,21 +29,5 @@
 	.fade-leave-active {
 		transition: opacity 1s ease;
 	}
-/*
-	.slide-left-enter{
-		transform: translate(100vw,0)
-	}
-	.slide-left-enter-active{
-		transition: all 1s ease
-	}
-	
-	.slide-left-leave-active{
-		transition: all 2s ease
-	}
-	
-	.slide-left-leave-active{
-		transform: translate(-100vw,0)
-	}
-*/
 
 </style>

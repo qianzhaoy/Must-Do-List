@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+  	<AppBar :pageTitle="pageTitle" v-if="!isWelcome"></AppBar>
+  	
    	<transition :name="direction">
     	<router-view class="views"></router-view>
 		</transition>
@@ -7,34 +9,45 @@
 </template>
 
 <script>
+	
+	import AppBar from '@/components/appBar'
+	
 	export default {
 		name: 'app',
 		data() {
 			return {
 				direction: "slide-left",
+				open: false,
+				pageTitle: "主页",
+				isWelcome: false
 			}
+		},
+		methods:{
+			toggle() {
+				this.open = !this.open
+			}
+		},
+		created(){
+			this.isWelcome = this.$route.meta.isWelcome || false;
 		},
 		watch: {
 			$route(to, from) {
+				this.isWelcome = to.meta.isWelcome || false;
+				this.pageTitle = to.meta.pageTitle || "";
+				
 				const toDepth = to.path.split('/').length
 				const fromDepth = from.path.split('/').length
 				this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
 			}
+		},
+		components:{
+			AppBar
 		}
 	}
 
 </script>
 
-<style>
-	html {
-		font-size: 100px;
-	}
-	
-	body {
-		height: 100vh;
-		width: 100vw;
-	}
-	
+<style scoped>
 	#app {
 		height: 100%;
 		width: 100%;
@@ -44,9 +57,10 @@
 		position: absolute;
 		top: 0;
 		width: 100%;
-		height: 100%;
+		height: calc(100% - 56px);
 		overflow-x: auto;
 		overflow-y: hidden;
+		margin-top: 56px;
 	}
 	
 	.slide-left-enter {
