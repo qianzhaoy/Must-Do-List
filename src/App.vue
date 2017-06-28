@@ -1,9 +1,10 @@
 <template>
   <div id="app">
   	<AppBar :pageTitle="pageTitle" v-if="!isWelcome"></AppBar>
-  	
    	<transition :name="direction">
-    	<router-view class="views"></router-view>
+			<keep-alive>
+    		<router-view class="views"></router-view>
+			</keep-alive>
 		</transition>
   </div>
 </template>
@@ -16,7 +17,6 @@
 		name: 'app',
 		data() {
 			return {
-				direction: "slide-left",
 				open: false,
 				pageTitle: "主页",
 				isWelcome: false
@@ -37,7 +37,12 @@
 				
 				const toDepth = to.path.split('/').length
 				const fromDepth = from.path.split('/').length
-				this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+//				this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+			}
+		},
+		computed:{
+			direction(){
+				return this.$store.state.direction
 			}
 		},
 		components:{
@@ -58,8 +63,8 @@
 		top: 0;
 		width: 100%;
 		height: calc(100% - 56px);
-		overflow-x: auto;
-		overflow-y: hidden;
+		overflow-x: hidden;
+		overflow-y: auto;
 		margin-top: 56px;
 	}
 	
