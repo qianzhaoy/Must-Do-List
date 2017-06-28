@@ -17,6 +17,8 @@
 </template>
 
 <script>
+	import { mapMutations } from 'vuex'
+	
 	export default {
 		data() {
 			return {
@@ -26,8 +28,15 @@
 		},
 		methods: {
 			complete() {
-				this.toggle()
-				this.text = "-"
+				this.$store.commit("spliceHistory", {
+					value: this.text,
+					status: 'success',
+					time: "2017-6-28",
+					id: this.listLength + 1
+				})
+				this.$store.commit('setSuccess');
+				this.toggle();
+				this.text = "恭喜你完成了!";
 			},
 			toggle() {
 				this.dialog = !this.dialog
@@ -36,7 +45,11 @@
 
 			}
 		},
-		components: {}
+		computed: {
+			listLength() {
+				return this.$store.getters.listLength
+			}
+		}
 	}
 
 </script>
