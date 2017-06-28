@@ -38,9 +38,11 @@
 		},
 		methods: {
 			back(){
+				this.backIcon === "arrow_back_ios" && this.$store.commit("setDirection", 'slide-right');
 				this.backIcon === "arrow_back_ios" && this.$router.go(-1);
 			},
 			toggle() {
+				this.$store.commit("setDirection", 'slide-left')
 				this.open = !this.open
 			}
 		},
