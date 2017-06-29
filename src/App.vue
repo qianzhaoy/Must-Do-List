@@ -10,9 +10,8 @@
 </template>
 
 <script>
-	
 	import AppBar from '@/components/appBar'
-	
+
 	export default {
 		name: 'app',
 		data() {
@@ -22,30 +21,29 @@
 				isWelcome: false
 			}
 		},
-		methods:{
+		methods: {
 			toggle() {
 				this.open = !this.open
+			},
+			setRouterInfo(route) {
+				this.isWelcome = route.meta.isWelcome || false;
+				this.pageTitle = route.meta.pageTitle || "";
 			}
 		},
-		created(){
-			this.isWelcome = this.$route.meta.isWelcome || false;
+		created() {
+			this.setRouterInfo(this.$route)
 		},
 		watch: {
 			$route(to, from) {
-				this.isWelcome = to.meta.isWelcome || false;
-				this.pageTitle = to.meta.pageTitle || "";
-				
-				const toDepth = to.path.split('/').length
-				const fromDepth = from.path.split('/').length
-//				this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+				this.setRouterInfo(to)
 			}
 		},
-		computed:{
-			direction(){
+		computed: {
+			direction() {
 				return this.$store.state.direction
 			}
 		},
-		components:{
+		components: {
 			AppBar
 		}
 	}

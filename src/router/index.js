@@ -3,11 +3,14 @@ import Router from 'vue-router'
 import Welcome from '@/views/welcome'
 import WelcomeA from '@/components/welcome/welcomeA'
 import WelcomeB from '@/components/welcome/welcomeB'
+import ChildrenRepo from '@/components/repository/childrenRepo'
 
 import Home from '@/views/home'
 import History from '@/views/history'
 import Repository from '@/views/repository'
 import Allocation from '@/views/allocation'
+
+import Store from '@/vuex/store'
 
 Vue.use(Router)
 
@@ -40,6 +43,13 @@ export default new Router({
 			}]
     },
 		{
+			path: '/',
+			component: Home,
+			meta: {
+				pageTitle: '主页'
+			}
+    },
+		{
 			path: '/home',
 			component: Home,
 			meta: {
@@ -60,6 +70,19 @@ export default new Router({
 				pageTitle: '库'
 			}
     },
+		{
+			path: '/repository/:id',
+			component: ChildrenRepo,
+			meta: {
+				pageTitle: ''
+			},
+			beforeEnter(to, from, next){
+				const paramId = parseInt(to.params.id)
+				const page = Store.state.repository.data.filter(li => li.id === paramId)
+				to.meta.pageTitle = page.length ? page[0].title : ""
+				next()
+			}
+		},
 		{
 			path: '/allocation',
 			component: Allocation,
