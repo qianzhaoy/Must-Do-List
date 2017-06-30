@@ -86,9 +86,6 @@ const mutations = {
 			return li.id != id
 		})
 	},
-	spliceRepo(state, li) {
-		state.data.splice(0, 0, li)
-	}
 }
 
 const getters = {

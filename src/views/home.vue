@@ -4,9 +4,8 @@
 			{{text}}
 			<mu-icon-button icon="done" class="done"  @click="toggle" />
 		</div>
-		
+		 
 		<mu-float-button icon="replay" @click="next" class="nextBtn" backgroundColor="white" />
-
 		<mu-dialog :open="dialog">
 			你已经完成了今天的必做事情了吗?
 			<mu-flat-button slot="actions" @click="toggle" primary label="取消"/>
@@ -17,13 +16,15 @@
 </template>
 
 <script>
-	import { mapMutations } from 'vuex'
-	
+	import {
+		mapMutations
+	} from 'vuex'
+
 	export default {
 		data() {
 			return {
 				text: "学习",
-				dialog: false
+				dialog: false,
 			}
 		},
 		methods: {
@@ -42,8 +43,8 @@
 				this.dialog = !this.dialog
 			},
 			next() {
-
-			}
+				
+			},
 		},
 		computed: {
 			listLength() {
