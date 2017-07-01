@@ -1,18 +1,111 @@
 <template>
-	<div>sdsdsd</div>
+  <div id="repository">
+	 <mu-list>
+			<mu-list-item v-for="(li,ind) in list"  :value="li.childId" describeText="无" :key="li.childId">
+				<div slot="title">
+					{{li.value}}
+					<mu-icon 
+						value="border_color" 
+						color="#2196f3" 
+						:size="16"
+						@click="showInput(ind)"			 
+					/>
+				</div>
+
+				<mu-icon-button 
+					touch
+					@click="View(li.id)"
+					iconClass="bgColor" 
+					icon="remove_red_eye" 
+					slot="left"
+				/>
+
+				<mu-icon 
+					value="cancel" 
+					color="red" 
+					slot="right" 
+					@click.self="showDialog(ind)"
+				/>
+			</mu-list-item>
+		</mu-list>
+		
+		<InputDialog 
+			:open="inputDia" 
+			:showValue="activeLi.value"
+			v-on:cancel="inputToggle"
+			v-on:confirm="editor"
+		/>
+		
+		<mu-dialog :open="dialog">
+			确定删除{{activeLi.value}}吗?
+			<mu-flat-button slot="actions" @click="toggle" primary label="取消"/>
+			<mu-flat-button slot="actions" primary @click="complete" label="完成"/>
+		</mu-dialog>
+		
+	</div>
 </template>
 
 <script>
-	export default {
-		data() {
-			return {}
-		},
-		components: {}
-	}
+  import InputDialog from "@/components/inputDialog"
+  export default {
+    data() {
+      return {
+        activeInd: 0,
+        dialog: false,
+        inputDia: false,
+      }
+    },
+    methods: {
+      showInput(ind) {
+        this.activeInd = ind
+        this.inputToggle()
+      },
+      showDialog(ind) {
+        this.activeInd = ind
+        this.toggle()
+      },
+      editor(val) {
+        const id = this.activeLi.id
+        this.$store.commit("setTitle", {
+          id: id,
+          title: val
+        })
+        this.inputToggle()
+      },
+      View(id) {
+        this.$store.commit("setDirection", 'slide-left')
+        this.$router.push(`/repository/${id}`)
+      },
+      inputToggle() {
+        this.inputDia = !this.inputDia
+      },
+      toggle() {
+        this.dialog = !this.dialog
+      },
+      complete() {
+        this.$store.commit("deleteRepo", this.activeLi.id)
+        this.toggle()
+      }
+    },
+    computed: {
+      list() {
+        const mustListId = this.$route.params.id
+        return this.$store.state.repository.data[mustListId].childrens
+      },
+      activeLi() {
+        return this.list[this.activeInd]
+      }
+    },
+    components: {
+      InputDialog
+    }
+  }
 
 </script>
 
 <style>
-
+  .bgColor {
+    color: #2196f3
+  }
 
 </style>

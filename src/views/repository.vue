@@ -1,6 +1,6 @@
 <template>
   <div id="repository">
-	 <mu-list :value="value">
+	 <mu-list>
 			<mu-list-item v-for="(li,ind) in list"  :value="li.id" describeText="无" :key="li.id">
 				<div slot="title">
 					{{li.title}}
@@ -42,68 +42,69 @@
 			<mu-flat-button slot="actions" primary @click="complete" label="完成"/>
 		</mu-dialog>
 		
-		
-<!--		<InputDialog :open="inputDia" :title=""></InputDialog>-->
 	</div>
 </template>
 
 <script>
-	import InputDialog from "@/components/inputDialog"
-	export default {
-		data() {
-			return {
-				value:"",
-				activeInd: 0,
-				dialog: false,
-				inputDia: false,
-			}
-		},
-		methods:{
-			showInput(ind){
-				this.activeInd = ind
-				this.inputToggle()
-			},
-			showDialog(ind){
-				this.activeInd = ind
-				this.toggle()
-			},
-			editor(val){
-				console.log(val);
-				this.inputToggle()
-			},
-			View(id){
-				this.$store.commit("setDirection", 'slide-left')
-				this.$router.push(`/repository/${id}`)
-			},
-			inputToggle(){
-				this.inputDia = !this.inputDia
-			},
-			toggle(){
-				this.dialog = !this.dialog
-			},
-			complete(){
-				this.$store.commit("deleteRepo", this.activeLi.id)
-				this.toggle()
-			}
-		},
-		computed: {
-			list() {
-				return this.$store.state.repository.data
-			},
-			activeLi(){
-				return this.list[this.activeInd]
-			}
-		},
-		components:{
-			InputDialog
-		}
-	}
+  import InputDialog from "@/components/inputDialog"
+  export default {
+    data() {
+      return {
+        activeInd: 0,
+        dialog: false,
+        inputDia: false,
+      }
+    },
+    methods: {
+      showInput(ind) {
+        this.activeInd = ind
+        this.inputToggle()
+      },
+      showDialog(ind) {
+        this.activeInd = ind
+        this.toggle()
+      },
+      editor(val) {
+        const id = this.activeLi.id
+        this.$store.commit("setTitle", {
+          id: id,
+          title: val
+        })
+        this.inputToggle()
+      },
+      View(id) {
+        this.$store.commit("setDirection", 'slide-left')
+        this.$router.push(`/repository/${id}`)
+      },
+      inputToggle() {
+        this.inputDia = !this.inputDia
+      },
+      toggle() {
+        this.dialog = !this.dialog
+      },
+      complete() {
+        this.$store.commit("deleteRepo", this.activeLi.id)
+        this.toggle()
+      }
+    },
+    computed: {
+      list() {
+        return this.$store.state.repository.data
+      },
+      activeLi() {
+        return this.list[this.activeInd]
+      }
+    },
+    components: {
+      InputDialog
+    }
+  }
 
 </script>
 
 <style>
+  .bgColor {
+    color: #2196f3
+  }
 
-	.bgColor{
-		color: #2196f3
-	}
 </style>
