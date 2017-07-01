@@ -1,7 +1,7 @@
 <template>
   <div id="repository">
 	 <mu-list>
-			<mu-list-item v-for="(li,ind) in list"  :value="li.id" describeText="无" :key="li.id">
+			<mu-list-item v-for="(li,ind) in list" describeText="无" :key="li.id">
 				<div slot="title">
 					{{li.title}}
 					<mu-icon 

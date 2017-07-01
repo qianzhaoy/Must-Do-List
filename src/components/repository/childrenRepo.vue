@@ -1,7 +1,7 @@
 <template>
   <div id="repository">
 	 <mu-list>
-			<mu-list-item v-for="(li,ind) in list"  :value="li.childId" describeText="无" :key="li.childId">
+			<mu-list-item v-for="(li,ind) in list" describeText="无" :key="li.childId">
 				<div slot="title">
 					{{li.value}}
 					<mu-icon 
@@ -66,10 +66,6 @@
       },
       editor(val) {
         const id = this.activeLi.id
-        this.$store.commit("setTitle", {
-          id: id,
-          title: val
-        })
         this.inputToggle()
       },
       View(id) {
@@ -90,7 +86,9 @@
     computed: {
       list() {
         const mustListId = this.$route.params.id
-        return this.$store.state.repository.data[mustListId].childrens
+        const repoList = this.$store.state.repository.data
+        const mustdoList = repoList.filter(li => li.id == mustListId)
+        return mustdoList.length > 0 ? mustdoList[0].childrens : []
       },
       activeLi() {
         return this.list[this.activeInd]
