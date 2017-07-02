@@ -28,6 +28,9 @@
 				defaultValue: ''	
 			}
 		},
+        created(){
+          this.defaultValue = this.showValue
+        },
 		watch:{
 			showValue(val){
 				this.defaultValue = val

@@ -94,6 +94,35 @@ const mutations = {
       }
     })
   },
+  deleteItem(state, {parentId, childId}){
+    let deleteInd = null;
+    state.data.forEach((li,index) => {
+      if(li.id == parentId){
+        deleteInd = index
+        return false;
+      }
+    })
+    
+    state.data[deleteInd].childrens = state.data[deleteInd].childrens.filter(item => {
+      return item.childId != childId
+    })
+  },
+   setChildTitle(state, {parentId, childId, value}) {
+    let deleteInd = null;
+    state.data.forEach((li,index) => {
+      if(li.id == parentId){
+        deleteInd = index
+        return false;
+      }
+    })
+    
+    state.data[deleteInd].childrens.forEach(item => {
+      if(item.childId == childId){
+        item.value = value;
+        return false;
+      }
+    })
+  },
 }
 
 const getters = {

@@ -12,14 +12,6 @@
 					/>
 				</div>
 
-				<mu-icon-button 
-					touch
-					@click="View(li.id)"
-					iconClass="bgColor" 
-					icon="remove_red_eye" 
-					slot="left"
-				/>
-
 				<mu-icon 
 					value="cancel" 
 					color="red" 
@@ -28,16 +20,15 @@
 				/>
 			</mu-list-item>
 		</mu-list>
-		
 		<InputDialog 
 			:open="inputDia" 
-			:showValue="activeLi.value"
+            :showValue="activeli.value"
 			v-on:cancel="inputToggle"
 			v-on:confirm="editor"
 		/>
 		
 		<mu-dialog :open="dialog">
-			确定删除{{activeLi.value}}吗?
+			确定删除{{activeli.value}}吗?
 			<mu-flat-button slot="actions" @click="toggle" primary label="取消"/>
 			<mu-flat-button slot="actions" primary @click="complete" label="完成"/>
 		</mu-dialog>
@@ -65,12 +56,15 @@
         this.toggle()
       },
       editor(val) {
-        const id = this.activeLi.id
+        const parentId = this.$route.params.id
+        const childId = this.activeli.childId
+        const value = val
+        this.$store.commit("setChildTitle", {
+          parentId,
+          childId,
+          value
+        })
         this.inputToggle()
-      },
-      View(id) {
-        this.$store.commit("setDirection", 'slide-left')
-        this.$router.push(`/repository/${id}`)
       },
       inputToggle() {
         this.inputDia = !this.inputDia
@@ -79,7 +73,12 @@
         this.dialog = !this.dialog
       },
       complete() {
-        this.$store.commit("deleteRepo", this.activeLi.id)
+        const parentId = this.$route.params.id
+        const childId = this.activeli.childId
+        this.$store.commit("deleteItem", {
+          parentId,
+          childId
+        })
         this.toggle()
       }
     },
@@ -90,8 +89,8 @@
         const mustdoList = repoList.filter(li => li.id == mustListId)
         return mustdoList.length > 0 ? mustdoList[0].childrens : []
       },
-      activeLi() {
-        return this.list[this.activeInd]
+      activeli() {
+        return this.list[this.activeInd] || {}
       }
     },
     components: {
