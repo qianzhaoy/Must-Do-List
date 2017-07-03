@@ -1,6 +1,6 @@
 <template>
   <div id="repository">
-	 <mu-list>
+	 <mu-list style="padding-bottom:50px">
 			<mu-list-item v-for="(li,ind) in list" describeText="无" :key="li.id">
 				<div slot="title">
 					{{li.title}}
@@ -29,6 +29,8 @@
 			</mu-list-item>
 		</mu-list>
 		
+		<FooterAdd @click="add" />
+		
 		<InputDialog 
 			:open="inputDia" 
 			:showValue="activeLi.title"
@@ -46,13 +48,16 @@
 </template>
 
 <script>
-  import InputDialog from "@/components/inputDialog"
+  import InputDialog from "@/components/repository/inputDialog"
+	import FooterAdd from "@/components/repository/footer"
+	
   export default {
     data() {
       return {
         activeInd: 0,
         dialog: false,
         inputDia: false,
+				isAdd: false
       }
     },
     methods: {
@@ -65,6 +70,7 @@
         this.toggle()
       },
       editor(val) {
+				console.log(1);
         const id = this.activeLi.id
         this.$store.commit("setTitle", {
           id: id,
@@ -76,6 +82,11 @@
         this.$store.commit("setDirection", 'slide-left')
         this.$router.push(`/repository/${id}`)
       },
+			add(e){
+				this.isAdd = true
+				this.activeInd = null
+				this.inputToggle()
+			},
       inputToggle() {
         this.inputDia = !this.inputDia
       },
@@ -92,11 +103,12 @@
         return this.$store.state.repository.data
       },
       activeLi() {
-        return this.list[this.activeInd]
+        return this.list[this.activeInd] || {}
       }
     },
     components: {
-      InputDialog
+      InputDialog,
+			FooterAdd,
     }
   }
 
@@ -106,5 +118,5 @@
   .bgColor {
     color: #2196f3
   }
-
+	
 </style>

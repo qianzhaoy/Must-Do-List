@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-  	<AppBar :pageTitle="pageTitle" v-if="!isWelcome"></AppBar>
+  	<AppBar :pageTitle="pageTitle" v-if="!isWelcome" />
    	<transition :name="direction">
 			<keep-alive>
     		<router-view class="views"></router-view>
@@ -57,12 +57,12 @@
 	}
 	
 	.views {
-		position: absolute;
-		top: 0;
 		width: 100%;
 		height: calc(100% - 56px);
 		overflow-x: hidden;
 		overflow-y: auto;
+		position: absolute;
+		top: 0;
 		margin-top: 56px;
 	}
 	

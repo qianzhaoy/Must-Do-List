@@ -1,6 +1,6 @@
 <template>
-  <div id="repository">
-	 <mu-list>
+  <div id="childRepo">
+	 <mu-list style="padding-bottom:50px">
 			<mu-list-item v-for="(li,ind) in list" describeText="无" :key="li.childId">
 				<div slot="title">
 					{{li.value}}
@@ -20,6 +20,9 @@
 				/>
 			</mu-list-item>
 		</mu-list>
+		
+		<FooterAdd />
+		
 		<InputDialog 
 			:open="inputDia" 
             :showValue="activeli.value"
@@ -37,7 +40,8 @@
 </template>
 
 <script>
-  import InputDialog from "@/components/inputDialog"
+  import InputDialog from "@/components/repository/inputDialog"
+  import FooterAdd from "@/components/repository/footer"
   export default {
     data() {
       return {
@@ -94,7 +98,8 @@
       }
     },
     components: {
-      InputDialog
+      InputDialog,
+			FooterAdd,
     }
   }
 
