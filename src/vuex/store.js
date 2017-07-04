@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import history from './modules/history'
 import repository from './modules/repository'
+import allocation from './modules/allocation'
 
 Vue.use(Vuex)
 
@@ -24,6 +25,7 @@ export default new Vuex.Store({
 	mutations,
   modules: {
 		history,
-		repository
+		repository,
+		allocation
   },
 })

@@ -4,11 +4,13 @@ import Welcome from '@/views/welcome'
 import WelcomeA from '@/components/welcome/welcomeA'
 import WelcomeB from '@/components/welcome/welcomeB'
 import ChildrenRepo from '@/components/repository/childrenRepo'
+import AllocationRepo from '@/components/allocation/allocationRepo'
 
 import Home from '@/views/home'
 import History from '@/views/history'
 import Repository from '@/views/repository'
 import Allocation from '@/views/allocation'
+
 
 import Store from '@/vuex/store'
 
@@ -76,7 +78,7 @@ export default new Router({
 			meta: {
 				pageTitle: ''
 			},
-			beforeEnter(to, from, next){
+			beforeEnter(to, from, next) {
 				const paramId = parseInt(to.params.id)
 				const page = Store.state.repository.data.filter(li => li.id === paramId)
 				to.meta.pageTitle = page.length ? page[0].title : ""
@@ -89,6 +91,22 @@ export default new Router({
 			meta: {
 				pageTitle: '库分配'
 			}
-    }
+    },
+		{
+			path: '/allocation/:week',
+			component: AllocationRepo,
+			meta: {
+				pageTitle: ''
+			},
+			beforeEnter(to, from, next) {
+				const week = parseInt(to.params.week)
+				Store.state.allocation.weeks.forEach((obj, ind) => {
+					if(ind === week)
+						to.meta.pageTitle = obj.title;
+						next();
+						return false;
+				});
+			}
+    },
 	]
 })

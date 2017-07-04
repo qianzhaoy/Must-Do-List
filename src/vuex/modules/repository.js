@@ -77,58 +77,6 @@ const state = {
       childId: 2,
       value: "学习18"
 		}]
-}, {
-    id: 5,
-    title: "周六库",
-    childrens: [{
-      childId: 0,
-      value: "学习16"
-		}, {
-      childId: 1,
-      value: "学习17"
-		}, {
-      childId: 2,
-      value: "学习18"
-		}]
-}, {
-    id: 5,
-    title: "周六库",
-    childrens: [{
-      childId: 0,
-      value: "学习16"
-		}, {
-      childId: 1,
-      value: "学习17"
-		}, {
-      childId: 2,
-      value: "学习18"
-		}]
-}, {
-    id: 5,
-    title: "周六库",
-    childrens: [{
-      childId: 0,
-      value: "学习16"
-		}, {
-      childId: 1,
-      value: "学习17"
-		}, {
-      childId: 2,
-      value: "学习18"
-		}]
-}, {
-    id: 5,
-    title: "周六库",
-    childrens: [{
-      childId: 0,
-      value: "学习16"
-		}, {
-      childId: 1,
-      value: "学习17"
-		}, {
-      childId: 2,
-      value: "学习18"
-		}]
 }]
 }
 
@@ -138,6 +86,7 @@ const mutations = {
       return li.id != id
     })
   },
+	
   setTitle(state, { id, title }) {
     state.data.forEach(li => {
       if (li.id === id) {
@@ -146,6 +95,7 @@ const mutations = {
       }
     })
   },
+	
   deleteItem(state, {parentId, childId}){
     let deleteInd = null;
     state.data.forEach((li,index) => {
@@ -159,7 +109,8 @@ const mutations = {
       return item.childId != childId
     })
   },
-   setChildTitle(state, {parentId, childId, value}) {
+	
+  setChildTitle(state, {parentId, childId, value}) {
     let deleteInd = null;
     state.data.forEach((li,index) => {
       if(li.id == parentId){
@@ -175,6 +126,22 @@ const mutations = {
       }
     })
   },
+	
+	addList(state, {id, childrens = [], title = ""}){
+		let obj = {id, childrens, title}
+		state.data.push(obj)
+	},
+	addItem(state, {parentId, obj}){
+		let deleteInd = null;
+    state.data.forEach((li,index) => {
+      if(li.id == parentId){
+        deleteInd = index
+        return false;
+      }
+    })
+		state.data[deleteInd] && state.data[deleteInd].childrens.push(obj)
+		
+	}
 }
 
 const getters = {
