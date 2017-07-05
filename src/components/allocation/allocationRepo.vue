@@ -19,20 +19,26 @@
 </template>
 
 <script>
-
 	export default {
-		methods:{
-			itemClick(index){
+		methods: {
+			itemClick(index) {
 				const ind = this.$route.params.week
 				const li = this.list[index]
 				const repository = {
 					id: li.id,
 					title: li.title,
 				}
-				this.$store.commit('pushAllocation', {
-					ind,
-					repository
-				})
+
+				if (this.allocation.indexOf(li.id) < 0) {
+					this.$store.commit('pushAllocation', {
+						ind,
+						repository
+					})
+					return;
+				}
+				
+				this.$store.commit('cancel', { ind: ind,id: li.id })
+				
 			}
 		},
 		computed: {
@@ -50,8 +56,7 @@
 </script>
 
 <style>
-	
-	.myitem{
+	.myitem {
 		line-height: 35px
 	}
 

@@ -26,6 +26,9 @@ const state = {
 const mutations = {
 	pushAllocation(state, {ind, repository}){
 		state.weeks[ind].allocation.push(repository)
+	},
+	cancel(state, {ind, id}){
+		state.weeks[ind].allocation = state.weeks[ind].allocation.filter(obj => obj.id != id)
 	}
 }
 

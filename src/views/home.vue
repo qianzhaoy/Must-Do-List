@@ -1,8 +1,8 @@
 <template>
 	<div id="home">
 		<div class="mustDo">
-			{{text}}
-			<mu-icon-button icon="done" class="done"  @click="toggle" />
+			{{isSuccess ? '恭喜你完成了!' : text}}
+			<mu-icon-button v-if="!isSuccess" icon="done" class="done"  @click="toggle" />
 		</div>
 		 
 		<mu-float-button icon="replay" @click="next" class="nextBtn" backgroundColor="white" />
@@ -37,7 +37,6 @@
 				})
 				this.$store.commit('setSuccess');
 				this.toggle();
-				this.text = "恭喜你完成了!";
 			},
 			toggle() {
 				this.dialog = !this.dialog
@@ -49,6 +48,9 @@
 		computed: {
 			listLength() {
 				return this.$store.getters.listLength
+			},
+			isSuccess(){
+				return this.$store.state.isSuccess
 			}
 		}
 	}
@@ -62,7 +64,6 @@
 		top: 30%;
 		width: 100%;
 		text-align: center;
-		text-indent: 2em;
 	}
 	
 	.done {
