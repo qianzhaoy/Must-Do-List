@@ -22,12 +22,28 @@
 
 	export default {
 		data() {
+			const today = new Date().getDay()
 			return {
 				text: "学习",
 				dialog: false,
+				today: today,
+				todoList: []
 			}
 		},
+		created() {
+			this.randomRepo()
+		},
 		methods: {
+			randomRepo() {
+				let bindRepo = this.getBindRepo()
+				bindRepo.forEach(obj => {
+					this.todoList = Array.concat(this.todoList, obj.childrens.map(child => child.value))
+				})
+				this.todoList.length === 0 && this.todoList.push("无")
+				
+				let random = Math.floor((Math.random() * this.todoList.length))
+				this.text = this.todoList[random]
+			},
 			complete() {
 				this.$store.commit("spliceHistory", {
 					value: this.text,
@@ -42,16 +58,27 @@
 				this.dialog = !this.dialog
 			},
 			next() {
-				
+				!this.isSuccess && this.randomRepo()
+			},
+			getBindRepo() {
+				return this.repository.filter(repo => {
+					return this.allocation.indexOf(repo.id) > -1
+				})
 			},
 		},
 		computed: {
 			listLength() {
 				return this.$store.getters.listLength
 			},
-			isSuccess(){
+			isSuccess() {
 				return this.$store.state.isSuccess
-			}
+			},
+			allocation() {
+				return this.$store.state.allocation.weeks[this.today].allocation.map(obj => obj.id)
+			},
+			repository() {
+				return this.$store.state.repository.data
+			},
 		}
 	}
 

@@ -1,5 +1,8 @@
 const state = {
 	weeks:[{
+		title:'周日',
+		allocation: []
+	},{
 		title:'周一',
 		allocation: [{id:0, title:"周一库"}]
 	},{
@@ -7,7 +10,7 @@ const state = {
 		allocation: []
 	},{
 		title:'周三',
-		allocation: []
+		allocation: [{id:0, title:"周一库"},{id: 1,title: "周二库"}]
 	},{
 		title:'周四',
 		allocation: []
@@ -16,9 +19,6 @@ const state = {
 		allocation: []
 	},{
 		title:'周六',
-		allocation: []
-	},{
-		title:'周日',
 		allocation: []
 	}]
 }
