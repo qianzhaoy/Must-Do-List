@@ -19,10 +19,10 @@ Vue.use(Router)
 export default new Router({
 	routes: [
 		{
-			path: '/welcome',
+			path: '/',
 			component: Welcome,
 			meta: {
-				isWelcome: true
+				isWelcome: '主页'
 			},
 			children: [{
 				path: "/",
@@ -43,13 +43,6 @@ export default new Router({
 					isWelcome: true
 				}
 			}]
-    },
-		{
-			path: '/',
-			component: Home,
-			meta: {
-				pageTitle: '主页'
-			}
     },
 		{
 			path: '/home',
@@ -101,10 +94,10 @@ export default new Router({
 			beforeEnter(to, from, next) {
 				const week = parseInt(to.params.week)
 				Store.state.allocation.weeks.forEach((obj, ind) => {
-					if(ind === week)
+					if (ind === week)
 						to.meta.pageTitle = obj.title;
-						next();
-						return false;
+					next();
+					return false;
 				});
 			}
     },

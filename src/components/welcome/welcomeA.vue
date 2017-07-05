@@ -13,7 +13,7 @@
 		name: "welcomeA",
 		methods:{
 			onSwipeLeft(){
-				this.$router.push('/welcome/B')
+				this.$router.push('/B')
 			}
 		}
 	}

@@ -17,7 +17,7 @@
 				this.$router.push('/home')
 			},
 			onSwipeRight() {
-				this.$router.push('/welcome/A')
+				this.$router.push('/A')
 			}
 		}
 	}
