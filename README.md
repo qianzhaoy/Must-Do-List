@@ -9,7 +9,7 @@ vue2 + muse-ui + vuex + vue-router + vue-touch + webpack + ES6
 没有写后端接口, 因为主要还是以Vue为主.(多麻烦啊,直接放上去就能看方便!)
 各个页面数据相关放在了vuex的modules里了.详情请看vuex/modules/目录下的文件.
 
-# 效果演示
+## 效果演示
 
 [查看demo请戳这里](https://qianzhaoy.github.io/production/MustTodo/)（请用chrome手机模式预览）
 
