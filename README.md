@@ -69,9 +69,8 @@ vue2 + muse-ui + vuex + vue-router + vue-touch + webpack + ES6
 │       │   └── repository.js
 │       └── store.js
 └── static
+
 ```
-
-
 ## 启动相关
 
 ``` bash

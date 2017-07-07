@@ -10,7 +10,6 @@ import 'muse-ui/dist/theme-teal.css'
 import '@/assets/css/reset.css'
 const VueTouch = require('vue-touch')
 
-
 Vue.use(VueTouch, {name: 'v-touch'})
 Vue.use(MuseUI)
 Vue.config.productionTip = false

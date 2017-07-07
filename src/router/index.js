@@ -18,7 +18,6 @@ Vue.use(Router)
 const weeks = ["周日","周一","周二","周三","周四","周五","周六"]
 const dayNum = new Date().getDay()
 var today = weeks[dayNum]
-console.log(today);
 		
 export default new Router({
 	routes: [
