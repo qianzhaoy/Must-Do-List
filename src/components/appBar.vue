@@ -33,7 +33,8 @@
 		},
 		computed:{
 			backIcon(){
-				return this.pageTitle === "主页" ? 'close' : 'arrow_back_ios'
+				const path = this.$route.path
+				return path === "/home" ? 'close' : 'arrow_back_ios'
 			}
 		},
 		methods: {

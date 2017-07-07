@@ -38,6 +38,7 @@
 	}
 	
 	.rightArrow {
+		width: 24px;
 		position: absolute;
 		right: 5px;
 		top: calc(50% - 12px);
