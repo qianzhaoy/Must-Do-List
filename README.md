@@ -2,12 +2,12 @@
 开始用Vue一段时间了, 开始想整合一下自己所学. 苦思冥想一个todolist, 加上一些自己感觉挺有意思的东西. 每日一做, 每天做一件自己必须做的事, 不要混日子.所以就叫做must-todu-list吧.
 
 
-###关于技术栈
-    vue2 + muse-ui + vuex + vue-router + vue-touch + webpack + ES6
+### 关于技术栈
+vue2 + muse-ui + vuex + vue-router + vue-touch + webpack + ES6
 
 ### 数据相关
-    没有写后端接口, 因为主要还是以Vue为主.(多麻烦啊,直接放上去就能看方便!)
-    各个页面数据相关放在了vuex的modules里了.详情请看vuex/modules/目录下的文件.
+没有写后端接口, 因为主要还是以Vue为主.(多麻烦啊,直接放上去就能看方便!)
+各个页面数据相关放在了vuex的modules里了.详情请看vuex/modules/目录下的文件.
 
 ### 目录结构如下
 ```
